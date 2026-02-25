@@ -30,7 +30,7 @@
         {% endwith %}
 
         <section class="card">
-            <form method="POST" action="{{ url_for('main.submit_answer') }}" enctype="multipart/form-data" class="stack">
+            <form method="POST" action="{{ url_for('main.submit_answer') }}" enctype="multipart/form-data" class="stack" id="submitAnswerForm">
                 <input type="hidden" name="auto_timeout" id="auto-timeout" value="0" />
                 <div class="field">
                     <label for="answer">Your Answer</label>
@@ -47,10 +47,29 @@
                     </button>
                     <span id="voice-status" class="status-pill">Idle</span>
                 </div>
-                <button type="submit" class="btn-primary">Submit Answer</button>
+                <button type="submit" class="btn-primary" id="submitAnswerBtn">
+                    <span id="submitAnswerLabel">Submit Answer</span>
+                    <span class="btn-spinner" id="submitAnswerSpinner" aria-hidden="true"></span>
+                </button>
             </form>
         </section>
     </main>
+    <script>
+        (function () {
+            const form = document.getElementById("submitAnswerForm");
+            const button = document.getElementById("submitAnswerBtn");
+            const label = document.getElementById("submitAnswerLabel");
+            const spinner = document.getElementById("submitAnswerSpinner");
+            if (!form || !button || !label || !spinner) return;
+
+            form.addEventListener("submit", function () {
+                button.disabled = true;
+                button.classList.add("loading");
+                label.textContent = "Submitting...";
+                spinner.classList.add("active");
+            });
+        })();
+    </script>
     <script src="{{ url_for('static', filename='js/interview_voice.js') }}"></script>
     <script src="{{ url_for('static', filename='js/interview_timer.js') }}"></script>
 </body>

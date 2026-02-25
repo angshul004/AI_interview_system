@@ -29,7 +29,7 @@
         {% endwith %}
 
         <section class="card">
-            <form method="POST" action="{{ url_for('main.start_interview') }}" class="stack">
+            <form method="POST" action="{{ url_for('main.start_interview') }}" class="stack" id="startInterviewForm">
                 <div class="field">
                     <label for="domain">Interview Domain</label>
                     <select name="domain" id="domain" required>
@@ -55,9 +55,28 @@
                         <option value="120">120 seconds</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-primary">Start Interview</button>
+                <button type="submit" class="btn-primary" id="startInterviewBtn">
+                    <span id="startInterviewLabel">Start Interview</span>
+                    <span class="btn-spinner" id="startInterviewSpinner" aria-hidden="true"></span>
+                </button>
             </form>
         </section>
     </main>
+    <script>
+        (function () {
+            const form = document.getElementById("startInterviewForm");
+            const button = document.getElementById("startInterviewBtn");
+            const label = document.getElementById("startInterviewLabel");
+            const spinner = document.getElementById("startInterviewSpinner");
+            if (!form || !button || !label || !spinner) return;
+
+            form.addEventListener("submit", function () {
+                button.disabled = true;
+                button.classList.add("loading");
+                label.textContent = "Starting...";
+                spinner.classList.add("active");
+            });
+        })();
+    </script>
 </body>
 </html>
