@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AI Interview - History</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -13,6 +14,10 @@
 <body class="page-bg">
     <main class="shell">
         <section class="card hero-card">
+            <div class="brand-row">
+                <img src="{{ url_for('static', filename='favicon.ico') }}" alt="AI Interview logo" class="brand-logo" />
+                <span class="brand-name">AI Interview</span>
+            </div>
             <h1 class="title-xl">Interview History</h1>
             <p class="text-muted">Previous interview attempts stored in database.</p>
         </section>
